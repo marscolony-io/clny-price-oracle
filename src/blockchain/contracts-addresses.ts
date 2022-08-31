@@ -6,7 +6,7 @@ const NETWORK_DATA: Record<
   }
 > = {
   harmony: {
-    ORACLE: "0x7A8cc3F696Dd789d9b16F46A14dAA1F6e3f4C218",
+    ORACLE: "0xCf8411efc10157B5E6DA758B79f5d5D35f115a2A",
   },
   polygon: {
     ORACLE: "",
