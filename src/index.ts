@@ -1,5 +1,4 @@
 import { oneToUsd } from "./services/binance-api";
-import { environment } from "./environment";
 import { actualize } from "./blockchain/contracts";
 
 const INTERVAL = 5000;

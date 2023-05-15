@@ -1,7 +1,6 @@
 import { BigNumber, ethers, utils } from "ethers";
 import { CONTRACTS } from "./contracts-addresses";
 import ORACLE from "../abi/Oracle.json";
-import { AbiItem } from "web3-utils";
 import { ALCHEMY_KEY } from "../secrets";
 import { environment } from "../environment";
 
@@ -25,6 +24,14 @@ const nodeMap = {
 const provider = new ethers.providers.JsonRpcProvider(
   nodeMap[environment.NETWORK][0]
 );
+
+provider.on("error", (error) => {
+  console.log("provider error", error);
+  // wait 1 hour
+  setTimeout(() => {
+    process.exit(1); // pm2 will restart the process
+  });
+});
 
 var wallet = new ethers.Wallet(environment.PRIVATE_KEY, provider);
 const oracle = new ethers.Contract(CONTRACTS.ORACLE, ORACLE.abi, wallet);
