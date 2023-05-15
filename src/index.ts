@@ -1,7 +1,7 @@
 import { oneToUsd } from "./services/binance-api";
 import { actualize } from "./blockchain/contracts";
 
-const INTERVAL = 5000;
+const INTERVAL = 5 * 60 * 1000;
 const PRICE_DIFF = 0.03; // 3%
 const VALID_PERIOD = 4 * 60 * 60 * 1000; // 4 hours
 
@@ -27,8 +27,7 @@ const main = async () => {
     try {
       await sleep(INTERVAL);
       const price = await oneToUsd();
-      console.log("isPriceChanged", isPriceChanged(price));
-      console.log("isDataExpired", isDataExpired());
+      console.log({ isPriceChanged: isPriceChanged(price), isDataExpired: isDataExpired() });
       if (isPriceChanged(price) || isDataExpired()) {
         await actualize(price);
         lastPrice.lastUpdate = new Date();
