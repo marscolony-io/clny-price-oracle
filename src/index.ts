@@ -25,7 +25,6 @@ const isDataExpired = () => {
 const main = async () => {
   while (true) {
     try {
-      await sleep(INTERVAL);
       const price = await oneToUsd();
       console.log({ isPriceChanged: isPriceChanged(price), isDataExpired: isDataExpired() });
       if (isPriceChanged(price) || isDataExpired()) {
@@ -36,6 +35,7 @@ const main = async () => {
     } catch (error) {
       console.log("main loop error", error);
     }
+    await sleep(INTERVAL);
   }
 };
 
